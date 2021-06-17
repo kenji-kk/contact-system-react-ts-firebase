@@ -17,8 +17,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/kenji-kk/">
+        筧圭吾
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -57,7 +57,7 @@ export function LoginGuestPage() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          ログイン
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -66,7 +66,7 @@ export function LoginGuestPage() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="メールアドレス"
             name="email"
             autoComplete="email"
             autoFocus
@@ -77,7 +77,7 @@ export function LoginGuestPage() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="パスワード"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -93,17 +93,17 @@ export function LoginGuestPage() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            ログイン
           </Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
+                パスワードを忘れた方はこちら
               </Link>
             </Grid>
             <Grid item>
               <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"新規登録はこちら"}
               </Link>
             </Grid>
           </Grid>
