@@ -87,7 +87,7 @@ export function LoginGuestPage() {
             label="Remember me"
           />
           <Button
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
