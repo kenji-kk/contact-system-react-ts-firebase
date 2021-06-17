@@ -17,8 +17,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/kenji-kk/">
+        筧圭吾
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -70,6 +70,9 @@ export function NewGuestPage() {
                   label="姓"
                   name="lastName"
                   autoComplete="lname"
+                  inputProps={{
+                    maxLength: 8,
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -82,6 +85,9 @@ export function NewGuestPage() {
                   id="firstName"
                   label="名"
                   autoFocus
+                  inputProps={{
+                    maxLength: 8,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -93,6 +99,9 @@ export function NewGuestPage() {
                   label="メールアドレス"
                   name="email"
                   autoComplete="email"
+                  inputProps={{
+                    maxLength: 200,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -104,6 +113,9 @@ export function NewGuestPage() {
                   label="電話番号"
                   name="phone number"
                   autoComplete="phone number"
+                  inputProps={{
+                    maxLength: 12,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -116,14 +128,30 @@ export function NewGuestPage() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  inputProps={{
+                    maxLength: 30,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <ProductSelectButton />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="問い合わせ内容*"
+                  multiline
+                  rows={4}
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{
+                    maxLength: 2000,
+                  }}
+                />
+              </Grid>
             </Grid>
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
               color="primary"

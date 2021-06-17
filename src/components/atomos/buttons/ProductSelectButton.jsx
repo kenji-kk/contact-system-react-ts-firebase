@@ -18,7 +18,7 @@ export function ProductSelectButton() {
     <div className="ProductSelectButtonWrap">
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="product-simple-select-helper-label"></InputLabel>
-        <FormHelperText>製品種類を選択してください</FormHelperText>
+        <FormHelperText>製品種類を選択してください*</FormHelperText>
         <Select
           labelId="product-simple-select-helper-label"
           id="product-simple-select-helper"
