@@ -1,5 +1,5 @@
 import './App.css';
-import NewGuestPage from './components/pages/NewGuestPage'
+import {NewGuestPage} from './components/pages/NewGuestPage'
 
 function App() {
   return (
