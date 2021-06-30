@@ -1,0 +1,12 @@
+/* ProductSelectButton */
+
+.ProductSelectButtonWrap {
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.ProductSelectButtonWrap:hover {
+    border: 1px solid rgba(0, 0, 0, 1);
+}
