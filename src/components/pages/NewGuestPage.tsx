@@ -12,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import {ProductSelectButton} from '../atomos/buttons/ProductSelectButton';
+import { auth, db } from "../../firebase";
+import firebase from "firebase/app";
 
 function Copyright() {
   return (
@@ -56,7 +58,21 @@ export function NewGuestPage() {
   const [password, setPassword] =useState("");
   const [productType, setProductType] =useState("");
   const [content, setContent] =useState("");
-  
+  const signUpEmail = async () => {
+    const authUser = await auth.createUserWithEmailAndPassword(email, password);
+    await db.collection("Users").add({
+      uid:authUser.user?.uid,
+      lastName: lastName,
+      firstName: firstName,
+      email: email,
+      tel:tel,
+      password:password,
+      productType:productType,
+      content:content,
+      staff:false,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+  };
 
   return (
       <Container component="main" maxWidth="xs">
@@ -195,6 +211,15 @@ export function NewGuestPage() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={
+                async () =>{
+                  try {
+                    await signUpEmail();
+                  } catch (err) {
+                    alert(err.message);
+                  }
+                }
+              }
             >
               登録
             </Button>
