@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -49,6 +49,15 @@ const useStyles = makeStyles((theme) => ({
 export function NewGuestPage() {
   const classes = useStyles();
 
+  const [lastName, setLastName] =useState("");
+  const [firstName, setFirstName] =useState("");
+  const [email, setEmail] =useState("");
+  const [tel, setTel] =useState("");
+  const [password, setPassword] =useState("");
+  const [productType, setProductType] =useState("");
+  const [content, setContent] =useState("");
+  
+
   return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -73,6 +82,11 @@ export function NewGuestPage() {
                   inputProps={{
                     maxLength: 8,
                   }}
+                  value={lastName}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setLastName(e.target.value);
+                  }
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -88,6 +102,11 @@ export function NewGuestPage() {
                   inputProps={{
                     maxLength: 8,
                   }}
+                  value={firstName}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setFirstName(e.target.value);
+                  }
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -102,6 +121,11 @@ export function NewGuestPage() {
                   inputProps={{
                     maxLength: 200,
                   }}
+                  value={email}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setEmail(e.target.value);
+                  }
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -109,13 +133,18 @@ export function NewGuestPage() {
                   variant="outlined"
                   required
                   fullWidth
-                  id="phone number"
+                  id="tel"
                   label="電話番号"
-                  name="phone number"
-                  autoComplete="phone number"
+                  name="tel"
+                  autoComplete="tel"
                   inputProps={{
                     maxLength: 12,
                   }}
+                  value={tel}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setTel(e.target.value);
+                  }
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -131,14 +160,19 @@ export function NewGuestPage() {
                   inputProps={{
                     maxLength: 30,
                   }}
+                  value={password}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setPassword(e.target.value);
+                  }
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
-                <ProductSelectButton />
+                <ProductSelectButton productType={productType} setProductType={setProductType}/>
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  id="outlined-multiline-static"
+                  id="content"
                   label="問い合わせ内容*"
                   multiline
                   rows={4}
@@ -147,6 +181,11 @@ export function NewGuestPage() {
                   inputProps={{
                     maxLength: 2000,
                   }}
+                  value={content}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setContent(e.target.value);
+                  }
+                  }
                 />
               </Grid>
             </Grid>

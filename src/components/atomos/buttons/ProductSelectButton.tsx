@@ -20,13 +20,21 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export function ProductSelectButton() {
+interface Props {
+  productType: string;
+  setProductType: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function ProductSelectButton(props:Props) {
   const classes = useStyles();
-  const [product, setProduct] = React.useState('');
+  
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setProduct(event.target.value as string);
+    setProductType(event.target.value as string);
   };
+
+  const { productType, setProductType } = props;
+  console.log(productType);
 
   return (
     <div className="ProductSelectButtonWrap">
@@ -36,7 +44,7 @@ export function ProductSelectButton() {
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            value={product}
+            value={productType}
             onChange={handleChange}
             autoWidth
           >
