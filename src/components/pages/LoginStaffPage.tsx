@@ -57,7 +57,7 @@ export function LoginStaffPage() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          ログイン
+          スタッフ用ログイン
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
