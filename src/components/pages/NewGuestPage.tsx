@@ -15,19 +15,6 @@ import {ProductSelectButton} from '../atomos/buttons/ProductSelectButton';
 import { auth, db } from "../../firebase";
 import firebase from "firebase/app";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://github.com/kenji-kk/">
-        筧圭吾
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -60,7 +47,7 @@ export function NewGuestPage() {
   const [content, setContent] =useState("");
   const signUpEmail = async () => {
     const authUser = await auth.createUserWithEmailAndPassword(email, password);
-    await db.collection("Users").add({
+    await db.collection("users").doc(authUser.user?.uid).set({
       uid:authUser.user?.uid,
       lastName: lastName,
       firstName: firstName,
@@ -223,18 +210,11 @@ export function NewGuestPage() {
             >
               登録
             </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  既にアカウントをお持ちの方はこちら
-                </Link>
-              </Grid>
-            </Grid>
           </form>
         </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
+        <button onClick={async () => {
+              await auth.signOut();
+            }}>サインアウト</button>
       </Container>
   );
 }
