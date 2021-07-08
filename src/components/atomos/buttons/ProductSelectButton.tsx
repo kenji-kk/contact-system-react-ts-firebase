@@ -34,7 +34,6 @@ export function ProductSelectButton(props:Props) {
   };
 
   const { productType, setProductType } = props;
-  console.log(productType);
 
   return (
     <div className="ProductSelectButtonWrap">

@@ -56,7 +56,7 @@ export function NewStaffPage() {
 
   const signUpEmail = async () => {
     const authUser = await auth.createUserWithEmailAndPassword(email, password);
-    await db.collection("Users").add({
+    await db.collection("users").doc(authUser.user?.uid).set({
       uid:authUser.user?.uid,
       email: email,
       password:password,

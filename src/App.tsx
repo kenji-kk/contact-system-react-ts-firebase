@@ -1,14 +1,25 @@
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser, login, logout } from "./features/userSlice";
+import { auth } from "./firebase";
+import { db } from "./firebase";
 import './App.css';
-import { NewGuestPage } from './components/pages/NewGuestPage';
-import { NewStaffPage } from './components/pages/NewStaffPage';
+import { BrowserRouter } from 'react-router-dom';
+import { Switch } from 'react-router';
+import { NewGuestPage } from "./components/pages/NewGuestPage";
 
-function App() {
+
+export const App: React.VFC = () => {
+
+  const dispatch = useDispatch();
+  
+
   return (
-    <>
-      <NewGuestPage />
-      <NewStaffPage />
-    </>
-  );
+    <BrowserRouter>
+      <Switch>
+        <NewGuestPage />
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
-export default App;

@@ -60,7 +60,7 @@ export function NewGuestPage() {
   const [content, setContent] =useState("");
   const signUpEmail = async () => {
     const authUser = await auth.createUserWithEmailAndPassword(email, password);
-    await db.collection("Users").add({
+    await db.collection("users").doc(authUser.user?.uid).set({
       uid:authUser.user?.uid,
       lastName: lastName,
       firstName: firstName,
