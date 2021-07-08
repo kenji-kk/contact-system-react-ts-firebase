@@ -7,7 +7,7 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Switch } from 'react-router';
 import { AfterAuth } from "./components/pages/AfterAuth";
-import { BeforAuth } from "./components/pages/BeforAuth";
+import { BeforAuth } from "./components/pages/BeforeAuth";
 
 
 export const App: React.VFC = () => {

@@ -14,20 +14,6 @@ import Container from '@material-ui/core/Container';
 import { auth, db } from "../../firebase";
 import firebase from "firebase/app";
 
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://github.com/kenji-kk/">
-        筧圭吾
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -52,7 +38,7 @@ export function NewStaffPage() {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
-  const [password,setPassword] = useState("");
+  const [password, setPassword] = useState("");
 
   const signUpEmail = async () => {
     const authUser = await auth.createUserWithEmailAndPassword(email, password);
@@ -135,18 +121,8 @@ export function NewStaffPage() {
             >
               登録
             </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  既にアカウントをお持ちの方はこちら
-                </Link>
-              </Grid>
-            </Grid>
           </form>
         </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
       </Container>
   );
 }

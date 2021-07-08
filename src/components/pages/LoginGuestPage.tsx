@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+import { auth } from "../../firebase";
+import { Link as LinkDom } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -48,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
 
 export function LoginGuestPage() {
   const classes = useStyles();
+  const [email , setEmail ] = useState("");
+  const [password, setPassword ] = useState("");
+  const signInEmail = async () => {
+    await auth.signInWithEmailAndPassword(email, password);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -70,6 +78,10 @@ export function LoginGuestPage() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setEmail(e.target.value);
+            }}
           />
           <TextField
             variant="outlined"
@@ -81,6 +93,10 @@ export function LoginGuestPage() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setPassword(e.target.value);
+            }}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -92,6 +108,15 @@ export function LoginGuestPage() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={
+                async () => {
+                    try {
+                      await signInEmail();
+                    } catch (err) {
+                      alert(err.message);
+                    }
+                  }
+            }
           >
             ログイン
           </Button>
@@ -102,9 +127,7 @@ export function LoginGuestPage() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"新規登録はこちら"}
-              </Link>
+              <LinkDom to='/staff'>スタッフの方はこちら</LinkDom>
             </Grid>
           </Grid>
         </form>
