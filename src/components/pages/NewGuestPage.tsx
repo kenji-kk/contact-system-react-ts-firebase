@@ -232,6 +232,9 @@ export function NewGuestPage() {
             </Grid>
           </form>
         </div>
+        <button onClick={async () => {
+              await auth.signOut();
+            }}>サインアウト</button>
         <Box mt={5}>
           <Copyright />
         </Box>

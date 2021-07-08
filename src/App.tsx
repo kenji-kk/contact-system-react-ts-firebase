@@ -6,17 +6,19 @@ import { db } from "./firebase";
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Switch } from 'react-router';
-import { NewGuestPage } from "./components/pages/NewGuestPage";
+import { AfterAuth } from "./components/pages/AfterAuth";
+import { BeforAuth } from "./components/pages/BeforAuth";
 
 
 export const App: React.VFC = () => {
-
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     const unSub = auth.onAuthStateChanged((authUser) => {
+      
       if (authUser) {
-        var docRef = db.collection("users").doc(authUser.uid);
+        var docRef = db.collection("users").doc(authUser?.uid);
 
         docRef.get().then(function(doc) {
             if (doc.exists) {
@@ -49,11 +51,17 @@ export const App: React.VFC = () => {
   }, [dispatch]);
 
   return (
+    <>
     <BrowserRouter>
       <Switch>
-        <NewGuestPage />
+      {user.uid  ? (
+        <AfterAuth />
+      ) : (
+        <BeforAuth />
+      )}
       </Switch>
     </BrowserRouter>
+    </>
   )
 }
 
