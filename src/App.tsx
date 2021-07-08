@@ -13,6 +13,40 @@ export const App: React.VFC = () => {
 
   const dispatch = useDispatch();
   
+  useEffect(() => {
+    const unSub = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        var docRef = db.collection("users").doc(authUser.uid);
+
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+              dispatch(
+                login({
+                  uid: doc.data()?.uid,
+                  lastName: doc.data()?.lastName,
+                  firstName: doc.data()?.firstName, 
+                  email: doc.data()?.email, 
+                  tel: doc.data()?.tel, 
+                  productType: doc.data()?.productType, 
+                  staff: doc.data()?.staff, 
+                  timestamp: doc.data()?.timestamp, 
+                  content: doc.data()?.content,
+                })
+              );
+            } else {
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+      } else {
+        dispatch(logout());
+      }
+    });
+    return () => {
+      unSub();
+    };
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
