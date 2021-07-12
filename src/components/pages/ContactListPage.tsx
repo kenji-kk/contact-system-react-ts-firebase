@@ -9,7 +9,7 @@ interface CONTACT  {
     tel: string;
     productType: string;
     staff: boolean; 
-    timestamp: string; 
+    timestamp: any; 
     content: string; 
 }
 
@@ -22,7 +22,7 @@ export const ContactListPage: React.VFC = () => {
         const unSub = db
           .collection("users")
           .where("staff", "==", false)
-          .orderBy("timestamp", "desc")
+          .orderBy("timestamp", "asc")
           .onSnapshot((snapshot) =>
             setContacts(
               snapshot.docs.map((doc) => (
@@ -51,10 +51,11 @@ export const ContactListPage: React.VFC = () => {
                 <>
                 {contacts.map((contact) => (
                     <>
-                    <p>{contact.gid}</p>
-                    <p>{contact.lastName}</p>
-                    <p>{contact.firstName}</p>
-                    <p>{contact.content}</p>
+                    <p>ユーザーID：{contact.gid}</p>
+                    <p>苗字：{contact.lastName}</p>
+                    <p>名前：{contact.firstName}</p>
+                    <p>お問い合わせ内容：{contact.content}</p>
+                    <p>お問い合わせ日時：{new Date(contact.timestamp?.toDate()).toLocaleString()}</p>
                     <p>---------------------</p>
                     </>
                 ))}
