@@ -4,16 +4,26 @@ import { selectUser, login, logout } from "./features/userSlice";
 import { auth } from "./firebase";
 import { db } from "./firebase";
 import './App.css';
-import { BrowserRouter } from 'react-router-dom';
-import { Switch } from 'react-router';
-import { AfterAuth } from "./components/pages/AfterAuth";
-import { BeforAuth } from "./components/pages/BeforeAuth";
+import { Route, useHistory } from 'react-router';
+import { ChatPage } from "./components/pages/ChatPage";
+import { ContactListPage } from "./components/pages/ContactListPage";
+import { NewGuestPage } from "./components/pages/NewGuestPage";
+import { LoginGuestPage } from "./components/pages/LoginGuestPage";
+import { NewStaffPage } from "./components/pages/NewStaffPage";
+import { LoginStaffPage } from "./components/pages/LoginStaffPage";
 
 
 export const App: React.VFC = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-
+  const history = useHistory();
+  const historyContact = () => {
+    history.push('/contactList');
+  }
+  const historyChat = () => {
+    history.push('/chat');
+  }
+  
   useEffect(() => {
     const unSub = auth.onAuthStateChanged((authUser) => {
       
@@ -35,6 +45,11 @@ export const App: React.VFC = () => {
                   content: doc.data()?.content,
                 })
               );
+              if (doc.data()?.staff){
+                historyContact();
+              } else if (!doc.data()?.staff){
+                historyChat();
+              } 
             } else {
                 console.log("No such document!");
             }
@@ -52,15 +67,20 @@ export const App: React.VFC = () => {
 
   return (
     <>
-    <BrowserRouter>
-      <Switch>
-      {user.uid  ? (
-        <AfterAuth />
-      ) : (
-        <BeforAuth />
-      )}
-      </Switch>
-    </BrowserRouter>
+        <Route exact path={'/chat'}>
+          <ChatPage />
+        </Route>
+        <Route exact path={'/contactList'}>
+          <ContactListPage />
+        </Route>
+        <Route exact path={'/'}>
+          <NewGuestPage />
+          <LoginGuestPage />
+        </Route>
+        <Route exact path={'/staff'}>
+          <NewStaffPage />
+          <LoginStaffPage />
+        </Route>
     </>
   )
 }
