@@ -1,7 +1,10 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { makeStyles, Grid } from '@material-ui/core'
 import { useSelector } from "react-redux";
 import { selectUser } from "./../../features/userSlice";
+import { MessageField } from '../atomos/forms/MessageField';
+import { MessageSubmitButton } from '../atomos/buttons/MessageSubmitButton';
+
 
 const useStyles = makeStyles({
     root: {
@@ -10,16 +13,17 @@ const useStyles = makeStyles({
     },
 });
 
-export const ContactInputField = () => {
+export const ContactInputField:React.VFC = () => {
     const classes = useStyles();
     const user = useSelector(selectUser);
+    const [text, setText] = useState(""); 
 
     return (
         <div className={classes.root}>
             <Grid container>
-                <Grid xs={4}>{user.staff ? "スタッフ入力フォーム" : "お客様入力フォーム" }</Grid>
-                <Grid xs={7}></Grid>
-                <Grid xs={1}></Grid>
+                <Grid item xs={2}>{user.staff ? "スタッフ入力フォーム" : "お客様入力フォーム" }</Grid>
+                <Grid item xs={9}><MessageField text={text} setText={setText} staff={user.staff}/></Grid>
+                <Grid item xs={1}><MessageSubmitButton text={text} setText={setText} staff={user.staff}/></Grid>
             </Grid>
         </div>
     )
