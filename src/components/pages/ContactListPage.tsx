@@ -3,6 +3,7 @@ import {  auth, db } from "../../firebase";
 import { useHistory } from 'react-router';
 import { useSelector } from "react-redux";
 import { selectUser } from "./../../features/userSlice";
+import { Link } from 'react-router-dom'
 
 interface CONTACT  {
     gid: string;
@@ -66,6 +67,7 @@ export const ContactListPage: React.VFC = () => {
                         <p>名前：{contact.firstName}</p>
                         <p>お問い合わせ内容：{contact.content}</p>
                         <p>お問い合わせ日時：{new Date(contact.timestamp?.toDate()).toLocaleString()}</p>
+                        <Link to={"/staffChat/" + contact.gid}>チャットページへ</Link>
                         <p>---------------------</p>
                     </div>
                 ))}

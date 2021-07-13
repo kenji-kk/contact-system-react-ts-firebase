@@ -16,13 +16,13 @@ const useStyles = makeStyles({
     },
 });
 
-export const GuestChatPage:React.VFC = memo(() => {
+export const StaffChatPage:React.VFC = memo(() => {
     const history = useHistory();
     const classes = useStyles();
     const user = useSelector(selectUser);
 
     useEffect(() => {
-        if(user.staff !== false)
+        if(user.staff === false)
         history.push('/')
     },[user.uid])
     return (

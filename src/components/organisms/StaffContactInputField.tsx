@@ -1,9 +1,9 @@
 import React,{ useState, useRef ,memo} from 'react'
 import { makeStyles, Grid } from '@material-ui/core'
 import { useSelector } from "react-redux";
-import { selectUser } from "./../../features/userSlice";
-import { MessageField } from '../atomos/forms/MessageField';
-import { MessageSubmitButton } from '../atomos/buttons/MessageSubmitButton';
+import { selectUser } from "../../features/userSlice";
+import { StaffMessageField } from '../atomos/forms/StaffMessageField';
+import { StaffMessageSubmitButton } from '../atomos/buttons/StaffMessageSubmitButton';
 import { auth } from "../../firebase";
 import { useHistory } from 'react-router';
 import { db } from "../../firebase";
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     },
 });
 
-export const GuestContactInputField:React.VFC = memo(() => {
+export const StaffContactInputField:React.VFC = memo(() => {
     const inputEl = useRef(null);
     const classes = useStyles();
     const user = useSelector(selectUser);
@@ -38,8 +38,8 @@ export const GuestContactInputField:React.VFC = memo(() => {
         <div className={classes.root}>
             <Grid container>
                 <Grid item xs={2}>{user.staff ? "スタッフ入力フォーム" : "お客様入力フォーム" }</Grid>
-                <Grid item xs={8}><MessageField inputEl={inputEl} text={text} setText={setText} staff={user.staff} newComment={newComment}/></Grid>
-                <Grid item xs={1}><MessageSubmitButton inputEl={inputEl} text={text} setText={setText} staff={user.staff} newComment={newComment}/></Grid>
+                <Grid item xs={8}><StaffMessageField inputEl={inputEl} text={text} setText={setText} staff={user.staff} newComment={newComment}/></Grid>
+                <Grid item xs={1}><StaffMessageSubmitButton inputEl={inputEl} text={text} setText={setText} staff={user.staff} newComment={newComment}/></Grid>
                 <Grid item xs={1}><button onClick={async () => {await auth.signOut();history.push('/');}}>サインアウト</button></Grid>
             </Grid>
         </div>
