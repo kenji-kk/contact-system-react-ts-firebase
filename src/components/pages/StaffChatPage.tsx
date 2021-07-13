@@ -1,10 +1,11 @@
 import React, { useEffect,useState, memo } from 'react'
 import { useHistory } from 'react-router';
-import { TextItems } from '../organisms/TextItems';
-import { ContactInputField } from '../organisms/ContactInputField';
+import { StaffTextItems } from '../organisms/StaffTextItems';
+import { StaffContactInputField } from '../organisms/StaffContactInputField';
 import { makeStyles } from '@material-ui/core'
 import { useSelector } from "react-redux";
 import { selectUser } from "../../features/userSlice";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -20,6 +21,8 @@ export const StaffChatPage:React.VFC = memo(() => {
     const history = useHistory();
     const classes = useStyles();
     const user = useSelector(selectUser);
+    const  { id }  = useParams<any>();
+    console.log(id)
 
     useEffect(() => {
         if(user.staff === false)
@@ -28,8 +31,8 @@ export const StaffChatPage:React.VFC = memo(() => {
     return (
         <>
             <div className={classes.root}>
-                <TextItems />
-                <ContactInputField />
+                <StaffTextItems id={id}/>
+                <StaffContactInputField id={id}/>
             </div>
         </>
     )

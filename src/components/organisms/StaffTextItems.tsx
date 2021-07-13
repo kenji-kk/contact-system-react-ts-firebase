@@ -12,13 +12,17 @@ const useStyles = makeStyles({
     },
 });
 
+interface PROPS {
+    id:any;
+}
+
 interface TEXT {
     who: string;
     text:string;
     timestamp:any;
 }
 
-export const StaffTextItems:React.VFC = memo(() => {
+export const StaffTextItems:React.VFC<PROPS> = memo(({id}) => {
     const classes = useStyles();
     const user = useSelector(selectUser);
     const [texts, setTexts] = useState<TEXT[]>([])
@@ -27,7 +31,7 @@ export const StaffTextItems:React.VFC = memo(() => {
     useEffect(() => {
         const unSub = db
           .collection("comments")
-          .where("uid", "==", user.uid)
+          .where("uid", "==", id)
           .orderBy("timestamp", "desc")
           .onSnapshot((snapshot) => {
             setTexts(
@@ -50,8 +54,8 @@ export const StaffTextItems:React.VFC = memo(() => {
                 <>
                 {texts.map((text,index) => (
                     <div key={index}>
-                        <p>{text.who}:         {text.text}{new Date(text.timestamp?.toDate()).toLocaleString()}</p>
-                        <p>---------------------</p>
+                        <p>{text.who}:　　{text.text}　　{new Date(text.timestamp?.toDate()).toLocaleString()}</p>
+                        <p>-----------------------------------------------------------------------</p>
                     </div>
                 ))}
                 </>

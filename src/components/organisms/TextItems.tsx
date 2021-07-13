@@ -50,8 +50,8 @@ export const TextItems:React.VFC = memo(() => {
                 <>
                 {texts.map((text,index) => (
                     <div key={index}>
-                        <p>{text.who}:         {text.text}{new Date(text.timestamp?.toDate()).toLocaleString()}</p>
-                        <p>---------------------</p>
+                        <p>{text.who}:　　{text.text}　　{new Date(text.timestamp?.toDate()).toLocaleString()}</p>
+                        <p>-----------------------------------------------------------------------</p>
                     </div>
                 ))}
                 </>

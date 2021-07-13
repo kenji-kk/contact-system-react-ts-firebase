@@ -17,7 +17,11 @@ const useStyles = makeStyles({
     },
 });
 
-export const StaffContactInputField:React.VFC = memo(() => {
+interface PROPS {
+    id:any;
+}
+
+export const StaffContactInputField:React.VFC<PROPS> = memo(({id}) => {
     const inputEl = useRef(null);
     const classes = useStyles();
     const user = useSelector(selectUser);
@@ -27,9 +31,9 @@ export const StaffContactInputField:React.VFC = memo(() => {
         e.preventDefault();
         db.collection("comments").add({
           text: text,
-          who: 'お客様',
+          who: '問い合わせ対応スタッフ',
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-          uid:user.uid,
+          uid: id,
         });
         setText("");
       };
