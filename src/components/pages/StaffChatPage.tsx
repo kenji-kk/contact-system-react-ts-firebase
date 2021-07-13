@@ -22,7 +22,6 @@ export const StaffChatPage:React.VFC = memo(() => {
     const classes = useStyles();
     const user = useSelector(selectUser);
     const  { id }  = useParams<any>();
-    console.log(id)
 
     useEffect(() => {
         if(user.staff === false)
