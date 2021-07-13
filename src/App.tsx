@@ -28,7 +28,7 @@ export const App: React.VFC = () => {
     const unSub = auth.onAuthStateChanged((authUser) => {
       
       if (authUser) {
-        var docRef = db.collection("users").doc(authUser?.uid);
+        const docRef = db.collection("users").doc(authUser?.uid);
 
         docRef.get().then(function(doc) {
             if (doc.exists) {
@@ -67,15 +67,15 @@ export const App: React.VFC = () => {
 
   return (
     <>
+        <Route exact path={'/'}>
+          <NewGuestPage />
+          <LoginGuestPage />
+        </Route>
         <Route exact path={'/chat'}>
           <ChatPage />
         </Route>
         <Route exact path={'/contactList'}>
           <ContactListPage />
-        </Route>
-        <Route exact path={'/'}>
-          <NewGuestPage />
-          <LoginGuestPage />
         </Route>
         <Route exact path={'/staff'}>
           <NewStaffPage />

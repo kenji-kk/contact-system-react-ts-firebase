@@ -20,12 +20,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface Props {
+interface PROPS {
   productType: string;
   setProductType: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function ProductSelectButton(props:Props) {
+export function ProductSelectButton(props:PROPS) {
   const classes = useStyles();
   
 

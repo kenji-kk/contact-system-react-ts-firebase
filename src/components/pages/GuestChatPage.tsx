@@ -4,7 +4,7 @@ import { TextItems } from '../organisms/TextItems';
 import { ContactInputField } from '../organisms/ContactInputField';
 import { makeStyles } from '@material-ui/core'
 import { useSelector } from "react-redux";
-import { selectUser } from "./../../features/userSlice";
+import { selectUser } from "../../features/userSlice";
 
 const useStyles = makeStyles({
     root: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     },
 });
 
-export const ChatPage:React.VFC = memo(() => {
+export const GuestChatPage:React.VFC = memo(() => {
     const history = useHistory();
     const classes = useStyles();
     const user = useSelector(selectUser);
