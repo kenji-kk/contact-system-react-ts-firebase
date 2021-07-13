@@ -25,10 +25,11 @@ export const ContactInputField:React.VFC = memo(() => {
     const history = useHistory();
     const newComment = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        db.collection("users").doc(user.uid).collection("comments").add({
+        db.collection("comments").add({
           text: text,
           who: 'お客様',
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          uid:user.uid,
         });
         setText("");
       };

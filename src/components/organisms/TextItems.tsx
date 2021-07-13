@@ -26,9 +26,8 @@ export const TextItems:React.VFC = memo(() => {
 
     useEffect(() => {
         const unSub = db
-          .collection("users")
-          .doc(user.uid)
           .collection("comments")
+          .where("uid", "==", user.uid)
           .orderBy("timestamp", "desc")
           .onSnapshot((snapshot) => {
             setTexts(

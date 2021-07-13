@@ -28,7 +28,7 @@ export const App: React.VFC = () => {
     const unSub = auth.onAuthStateChanged((authUser) => {
       
       if (authUser) {
-        var docRef = db.collection("users").doc(authUser?.uid);
+        const docRef = db.collection("users").doc(authUser?.uid);
 
         docRef.get().then(function(doc) {
             if (doc.exists) {
