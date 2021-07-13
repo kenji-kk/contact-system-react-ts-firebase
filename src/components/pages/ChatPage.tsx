@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState, memo } from 'react'
 import { useHistory } from 'react-router';
 import { TextItems } from '../organisms/TextItems';
 import { ContactInputField } from '../organisms/ContactInputField';
@@ -12,10 +12,11 @@ const useStyles = makeStyles({
         height: '100vh',
         gridTemplateRows: '1fr auto',
         margin: '10px',
+        
     },
 });
 
-export const ChatPage:React.VFC = () => {
+export const ChatPage:React.VFC = memo(() => {
     const history = useHistory();
     const classes = useStyles();
     const user = useSelector(selectUser);
@@ -23,7 +24,7 @@ export const ChatPage:React.VFC = () => {
     useEffect(() => {
         if(user.staff !== false)
         history.push('/')
-    },[])
+    },[user.uid])
     return (
         <>
             <div className={classes.root}>
@@ -32,4 +33,4 @@ export const ChatPage:React.VFC = () => {
             </div>
         </>
     )
-}
+})

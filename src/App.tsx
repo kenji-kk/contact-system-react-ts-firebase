@@ -67,15 +67,15 @@ export const App: React.VFC = () => {
 
   return (
     <>
+        <Route exact path={'/'}>
+          <NewGuestPage />
+          <LoginGuestPage />
+        </Route>
         <Route exact path={'/chat'}>
           <ChatPage />
         </Route>
         <Route exact path={'/contactList'}>
           <ContactListPage />
-        </Route>
-        <Route exact path={'/'}>
-          <NewGuestPage />
-          <LoginGuestPage />
         </Route>
         <Route exact path={'/staff'}>
           <NewStaffPage />

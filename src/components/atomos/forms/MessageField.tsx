@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState,memo} from 'react'
 import { TextField } from '@material-ui/core'
 
 interface PROPS {
     text: string;
     setText: React.Dispatch<React.SetStateAction<string>>;
     staff: boolean|null;
+    inputEl: any;
+    newComment: any;
 }
 
-export const MessageField:React.VFC<PROPS> = ({text,setText,staff}) => {
+export const MessageField:React.VFC<PROPS> = memo(({inputEl,text,setText,staff,newComment}) => {
     const [isComposed, setIsComposed] = useState(false);
     return (
         <TextField 
+        inputRef={inputEl}
+        autoFocus
         fullWidth={true}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setText(e.target.value);
@@ -22,8 +26,7 @@ export const MessageField:React.VFC<PROPS> = ({text,setText,staff}) => {
             if (text === '') return;
 
             if (e.key === 'Enter'){
-              setText('');
-              e.preventDefault();
+              newComment(e);
             }
           }}
           onCompositionStart={() => setIsComposed(true)}
@@ -32,4 +35,4 @@ export const MessageField:React.VFC<PROPS> = ({text,setText,staff}) => {
         />
     )
     
-}
+})
