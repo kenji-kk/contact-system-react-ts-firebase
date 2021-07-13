@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     },
 });
 
-export const ContactItems:React.VFC = () => {
+export const TextItems:React.VFC = () => {
     const classes = useStyles();
 
     return (

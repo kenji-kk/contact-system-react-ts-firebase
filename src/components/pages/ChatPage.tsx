@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import { auth } from "../../firebase";
 import { useHistory } from 'react-router';
-import { ContactItems } from '../organisms/ContactItems';
+import { TextItems } from '../organisms/TextItems';
 import { ContactInputField } from '../organisms/ContactInputField';
 import { makeStyles } from '@material-ui/core'
 import { useSelector } from "react-redux";
@@ -27,14 +26,10 @@ export const ChatPage:React.VFC = () => {
     },[])
     return (
         <>
-        <div className={classes.root}>
-            <ContactItems />
-            <ContactInputField />
-        </div>
-        <button onClick={async () => {
-            await auth.signOut();
-            history.push('/');
-          }}>サインアウト</button>
+            <div className={classes.root}>
+                <TextItems />
+                <ContactInputField />
+            </div>
         </>
     )
 }
