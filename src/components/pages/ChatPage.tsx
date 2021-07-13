@@ -12,6 +12,7 @@ const useStyles = makeStyles({
         display: 'grid',
         height: '100vh',
         gridTemplateRows: '1fr auto',
+        margin: '10px',
     },
 });
 
