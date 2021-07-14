@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "./../../features/userSlice";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
@@ -15,6 +16,8 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import MailIcon from '@material-ui/icons/Mail';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { SignoutButton } from '../atomos/buttons/SignoutButton';
+
 
 
 interface CONTACT  {
@@ -43,6 +46,13 @@ const useStyles = makeStyles((theme) => ({
         textDecoration:'none',
         color:'blue',
     },
+    headerWrap:{
+        textAlign:'center',
+    },
+    title:{
+        fontSize:'2vw',
+        fontWeight:'bold',
+    }
   }));
 
 export const ContactListPage: React.VFC = () => {
@@ -86,11 +96,10 @@ export const ContactListPage: React.VFC = () => {
       
     return (
         <div>
-            <p>お問い合わせ一覧ページです</p>
-            <button onClick={async () => {
-              await auth.signOut();
-              history.push('/staff');
-            }}>サインアウト</button>
+            <div className={classes.headerWrap}>
+                <p className={classes.title}>お問い合わせ一覧ページです</p>
+                <SignoutButton />
+            </div>
             <hr/>
             <Timeline align="alternate">
             {contacts[0]?.gid && (
@@ -118,7 +127,12 @@ export const ContactListPage: React.VFC = () => {
                                 <Typography>電話番号： {contact.tel}</Typography>
                                 <Typography>製品種別: {contact.productType}</Typography>
                                 <Typography>問い合わせ内容: {contact.content}</Typography>
-                                <Typography><Link className={classes.link} to={"/staffChat/" + contact.gid}>チャットページのリンクはこちら</Link></Typography>
+                                <Typography>　</Typography>
+                                <Typography>
+                                    <Link className={classes.link} to={"/staffChat/" + contact.gid}>
+                                    <Button variant="contained" color="primary" href="#contained-buttons">チャットページのリンクはこちら</Button>
+                                    </Link>
+                                </Typography>
                                 </Paper>
                             </TimelineContent>
                         </TimelineItem>
