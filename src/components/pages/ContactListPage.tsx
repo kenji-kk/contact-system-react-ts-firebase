@@ -3,7 +3,19 @@ import {  auth, db } from "../../firebase";
 import { useHistory } from 'react-router';
 import { useSelector } from "react-redux";
 import { selectUser } from "./../../features/userSlice";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Timeline from '@material-ui/lab/Timeline';
+import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import TimelineContent from '@material-ui/lab/TimelineContent';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import TimelineDot from '@material-ui/lab/TimelineDot';
+import MailIcon from '@material-ui/icons/Mail';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 
 interface CONTACT  {
     gid: string;
@@ -17,8 +29,25 @@ interface CONTACT  {
     content: string; 
 }
 
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      padding: '6px 16px',
+    },
+    secondaryTail: {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    head:{
+        fontWeight:'bold',
+    },
+    link:{
+        textDecoration:'none',
+        color:'blue',
+    },
+  }));
+
 export const ContactListPage: React.VFC = () => {
     const user = useSelector(selectUser);
+    const classes = useStyles();
     const [contacts, setContacts] = useState<CONTACT[]>([
     ]);
     const history = useHistory();
@@ -58,27 +87,45 @@ export const ContactListPage: React.VFC = () => {
     return (
         <div>
             <p>お問い合わせ一覧ページです</p>
-            <p>------------------------------------------------------------------------------------------------</p>
-            {contacts[0]?.gid && (
-                <>
-                {contacts.map((contact) => (
-                    <div key={contact.gid}>
-                        <p>氏名：{contact.lastName}　{contact.firstName}</p>
-                        <p>電話番号：{contact.tel}</p>
-                        <p>製品種別： {contact.productType}</p>
-                        <p>お問い合わせ内容：{contact.content}</p>
-                        <p>お問い合わせ日時：{new Date(contact.timestamp?.toDate()).toLocaleString()}</p>
-                        <p>ユーザーID：{contact.gid}</p>
-                        <Link to={"/staffChat/" + contact.gid}>チャットページへ</Link>
-                        <p>------------------------------------------------------------------------------------------------</p>
-                    </div>
-                ))}
-                </>
-            )}
             <button onClick={async () => {
               await auth.signOut();
               history.push('/staff');
             }}>サインアウト</button>
+            <hr/>
+            <Timeline align="alternate">
+            {contacts[0]?.gid && (
+                <>
+                {contacts.map((contact,index) => (
+                    
+                        <TimelineItem>
+                            <TimelineOppositeContent>
+                                <Typography variant="body2" color="textSecondary">
+                                {(index + 1)%2 == 1 ? new Date(contact.timestamp?.toDate()).toLocaleString() + "→" : "←" + new Date(contact.timestamp?.toDate()).toLocaleString()}
+                                </Typography>
+                            </TimelineOppositeContent>
+                            <TimelineSeparator>
+                                <TimelineDot color="primary">
+                                <MailIcon />
+                                </TimelineDot>
+                                <TimelineConnector />
+                            </TimelineSeparator>
+                            <TimelineContent>
+                                <Paper elevation={3} className={classes.paper}>
+                                <Typography variant="h6" component="h1">
+                                    <p className={classes.head}>{index + 1}人目の問い合わせ</p>
+                                </Typography>
+                                <Typography>氏名： {contact.lastName}{contact.firstName}</Typography>
+                                <Typography>電話番号： {contact.tel}</Typography>
+                                <Typography>製品種別: {contact.productType}</Typography>
+                                <Typography>問い合わせ内容: {contact.content}</Typography>
+                                <Typography><Link className={classes.link} to={"/staffChat/" + contact.gid}>チャットページのリンクはこちら</Link></Typography>
+                                </Paper>
+                            </TimelineContent>
+                        </TimelineItem>
+                ))}
+                </>
+            )}
+            </Timeline>
         </div>
     )
 }
