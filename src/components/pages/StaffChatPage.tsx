@@ -24,8 +24,8 @@ export const StaffChatPage:React.VFC = memo(() => {
     const  { id }  = useParams<any>();
 
     useEffect(() => {
-        if(user.staff === false)
-        history.push('/')
+        if(user.staff !== true)
+        history.push('/staff')
     },[user.uid])
     return (
         <>

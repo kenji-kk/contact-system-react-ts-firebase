@@ -58,17 +58,19 @@ export const ContactListPage: React.VFC = () => {
     return (
         <div>
             <p>お問い合わせ一覧ページです</p>
+            <p>------------------------------------------------------------------------------------------------</p>
             {contacts[0]?.gid && (
                 <>
                 {contacts.map((contact) => (
                     <div key={contact.gid}>
-                        <p>ユーザーID：{contact.gid}</p>
-                        <p>苗字：{contact.lastName}</p>
-                        <p>名前：{contact.firstName}</p>
+                        <p>氏名：{contact.lastName}　{contact.firstName}</p>
+                        <p>電話番号：{contact.tel}</p>
+                        <p>製品種別： {contact.productType}</p>
                         <p>お問い合わせ内容：{contact.content}</p>
                         <p>お問い合わせ日時：{new Date(contact.timestamp?.toDate()).toLocaleString()}</p>
+                        <p>ユーザーID：{contact.gid}</p>
                         <Link to={"/staffChat/" + contact.gid}>チャットページへ</Link>
-                        <p>---------------------</p>
+                        <p>------------------------------------------------------------------------------------------------</p>
                     </div>
                 ))}
                 </>
