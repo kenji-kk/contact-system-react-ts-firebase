@@ -8,6 +8,7 @@ import { auth } from "../../firebase";
 import { useHistory } from 'react-router';
 import { db } from "../../firebase";
 import firebase from "firebase/app";
+import { SignoutButton } from '../atomos/buttons/SignoutButton';
 
 
 const useStyles = makeStyles({
@@ -38,9 +39,9 @@ export const ContactInputField:React.VFC = memo(() => {
         <div className={classes.root}>
             <Grid container>
                 <Grid item xs={2}>{user.staff ? "スタッフ入力フォーム" : "お客様入力フォーム" }</Grid>
-                <Grid item xs={8}><MessageField inputEl={inputEl} text={text} setText={setText} staff={user.staff} newComment={newComment}/></Grid>
+                <Grid item xs={7}><MessageField inputEl={inputEl} text={text} setText={setText} staff={user.staff} newComment={newComment}/></Grid>
                 <Grid item xs={1}><MessageSubmitButton inputEl={inputEl} text={text} setText={setText} staff={user.staff} newComment={newComment}/></Grid>
-                <Grid item xs={1}><button onClick={async () => {await auth.signOut();history.push('/');}}>サインアウト</button></Grid>
+                <Grid item xs={2}><SignoutButton/></Grid>
             </Grid>
         </div>
     )
