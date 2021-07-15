@@ -6,15 +6,15 @@ import { makeStyles } from '@material-ui/core'
 import { useSelector } from "react-redux";
 import { selectUser } from "./../../features/userSlice";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'grid',
         height: '100vh',
         gridTemplateRows: '1fr auto',
-        margin: '10px',
+        backgroundColor: '#F2F2F2',
         
     },
-});
+}));
 
 export const ChatPage:React.VFC = memo(() => {
     const history = useHistory();
