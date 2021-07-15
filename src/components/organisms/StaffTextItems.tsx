@@ -135,7 +135,7 @@ export const StaffTextItems:React.VFC<PROPS> = memo(({id}) => {
                                 </Typography>
                             </TimelineContent>
                           </TimelineItem>
-                         : 
+                         :
                          <TimelineItem>
                           <TimelineOppositeContent>
                             <Typography>
