@@ -65,7 +65,10 @@ const useStyles = makeStyles({
       borderRadius: '2px',
       color: 'white',
       
-    }
+    },
+    content: {
+      marginTop: '10px',
+    },
 });
 
 interface TEXT {
@@ -121,7 +124,7 @@ export const TextItems:React.VFC = memo(() => {
                                   <div className={classes.textWrap}>
                                     <div className={classes.borderWrap}>
                                       <div className={classes.rightName}>{text.who}</div>
-                                      <div>{text.text}</div>
+                                      <div className={classes.content}>{text.text}</div>
                                     </div>
                                     <div className={classes.timelineWrap}>{text.timestamp?.toDate().toLocaleString()}</div>
                                   </div>
@@ -137,7 +140,7 @@ export const TextItems:React.VFC = memo(() => {
                                   <div className={classes.textWrap}>
                                     <div className={classes.borderWrap}>
                                       <div className={classes.leftName}>{text.who}</div>
-                                      <div>{text.text}</div>
+                                      <div className={classes.content}>{text.text}</div>
                                     </div>
                                     <div className={classes.timelineWrapLeft}>{text.timestamp?.toDate().toLocaleString()}</div>
                                   </div>
