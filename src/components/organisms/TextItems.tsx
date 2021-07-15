@@ -54,7 +54,7 @@ const useStyles = makeStyles({
       backgroundColor: '#32abdc',
       display: 'inline-block',
       padding: '7px',
-      borderRadius: '3px',
+      borderRadius: '2px',
       color: 'white',
       
     },
@@ -62,7 +62,7 @@ const useStyles = makeStyles({
       backgroundColor: '#00a968',
       display: 'inline-block',
       padding: '7px',
-      borderRadius: '3px',
+      borderRadius: '2px',
       color: 'white',
       
     }
