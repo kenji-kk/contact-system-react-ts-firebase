@@ -155,7 +155,7 @@ export const StaffTextItems:React.VFC<PROPS> = memo(({id}) => {
                             
                           </TimelineOppositeContent>
                           <TimelineSeparator>
-                            <Person style={{ color: '#32abdc'}}/>#32abdc
+                            <Person style={{ color: '#32abdc'}}/>
                             <TimelineConnector />
                           </TimelineSeparator>
                           <TimelineContent>
