@@ -12,7 +12,7 @@ import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import Typography from '@material-ui/core/Typography';
-import {Person,PersonOutline} from '@material-ui/icons';
+import {Person} from '@material-ui/icons';
 
 
 const useStyles = makeStyles({
@@ -65,7 +65,10 @@ const useStyles = makeStyles({
       borderRadius: '2px',
       color: 'white',
       
-    }
+    },
+    content: {
+      marginTop: '10px',
+    },
 });
 
 interface TEXT {
@@ -109,7 +112,7 @@ export const TextItems:React.VFC = memo(() => {
                         text.who === 'お客様' ? 
                           <TimelineItem key={index}>
                             <TimelineSeparator>
-                              <PersonOutline />
+                              <Person style={{ color: '#32abdc'}}/>
                               <TimelineConnector />
                             </TimelineSeparator>
                             <TimelineContent>
@@ -121,7 +124,7 @@ export const TextItems:React.VFC = memo(() => {
                                   <div className={classes.textWrap}>
                                     <div className={classes.borderWrap}>
                                       <div className={classes.rightName}>{text.who}</div>
-                                      <div>{text.text}</div>
+                                      <div className={classes.content}>{text.text}</div>
                                     </div>
                                     <div className={classes.timelineWrap}>{text.timestamp?.toDate().toLocaleString()}</div>
                                   </div>
@@ -137,7 +140,7 @@ export const TextItems:React.VFC = memo(() => {
                                   <div className={classes.textWrap}>
                                     <div className={classes.borderWrap}>
                                       <div className={classes.leftName}>{text.who}</div>
-                                      <div>{text.text}</div>
+                                      <div className={classes.content}>{text.text}</div>
                                     </div>
                                     <div className={classes.timelineWrapLeft}>{text.timestamp?.toDate().toLocaleString()}</div>
                                   </div>
@@ -149,7 +152,7 @@ export const TextItems:React.VFC = memo(() => {
                             
                           </TimelineOppositeContent>
                           <TimelineSeparator>
-                            <Person />
+                            <Person style={{ color: '#00a968'}}/>
                             <TimelineConnector />
                           </TimelineSeparator>
                           <TimelineContent>

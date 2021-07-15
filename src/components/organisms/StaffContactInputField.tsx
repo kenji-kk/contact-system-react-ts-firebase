@@ -14,7 +14,17 @@ import { SignoutButton } from '../atomos/buttons/SignoutButton';
 const useStyles = makeStyles({
     root: {
         gridRow:2,
-        margin:'26px',
+        margin:'0 10px 10px 10px',
+        paddingTop: '15px',
+        backgroundColor: '#e0e0e0',
+    },
+    nameWrap: {
+        backgroundColor: '#00a968',
+        display: 'inline-block',
+        padding: '7px',
+        borderRadius: '2px',
+        color: 'white',
+        marginLeft: '2vw'
     },
 });
 
@@ -42,7 +52,7 @@ export const StaffContactInputField:React.VFC<PROPS> = memo(({id}) => {
     return (
         <div className={classes.root}>
             <Grid container>
-                <Grid item xs={2}>{user.staff ? "スタッフ入力フォーム" : "お客様入力フォーム" }</Grid>
+                <Grid item xs={2}><div className={classes.nameWrap}>{user.staff ? "スタッフ入力フォーム" : "お客様入力フォーム" }</div></Grid>
                 <Grid item xs={7}><StaffMessageField inputEl={inputEl} text={text} setText={setText} staff={user.staff} newComment={newComment}/></Grid>
                 <Grid item xs={1}><StaffMessageSubmitButton inputEl={inputEl} text={text} setText={setText} staff={user.staff} newComment={newComment}/></Grid>
                 <Grid item xs={2}><SignoutButton /></Grid>
