@@ -105,8 +105,7 @@ export const ContactListPage: React.VFC = () => {
             {contacts[0]?.gid && (
                 <>
                 {contacts.map((contact,index) => (
-                    
-                        <TimelineItem>
+                    <TimelineItem>
                             <TimelineOppositeContent>
                                 <Typography variant="body2" color="textSecondary">
                                 {(index + 1)%2 == 1 ? new Date(contact.timestamp?.toDate()).toLocaleString() + "→" : "←" + new Date(contact.timestamp?.toDate()).toLocaleString()}
