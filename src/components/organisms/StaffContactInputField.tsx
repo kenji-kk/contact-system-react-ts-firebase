@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         backgroundColor: '#e0e0e0',
     },
     nameWrap: {
-        backgroundColor: '#32abdc',
+        backgroundColor: '#00a968',
         display: 'inline-block',
         padding: '7px',
         borderRadius: '2px',
