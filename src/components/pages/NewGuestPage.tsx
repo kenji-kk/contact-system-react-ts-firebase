@@ -58,6 +58,7 @@ export function NewGuestPage() {
       content:content,
       staff:false,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      state: '未対応',
     });
   };
 

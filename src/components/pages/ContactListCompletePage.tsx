@@ -2,7 +2,7 @@ import React, {useState, useEffect}from 'react'
 import {  auth, db } from "../../firebase";
 import { useHistory } from 'react-router';
 import { useSelector } from "react-redux";
-import { selectUser } from "./../../features/userSlice";
+import { selectUser } from "../../features/userSlice";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
@@ -55,12 +55,13 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-export const ContactListPage: React.VFC = () => {
+export const ContactListCompletePage: React.VFC = () => {
     const user = useSelector(selectUser);
     const classes = useStyles();
     const [contacts, setContacts] = useState<CONTACT[]>([
     ]);
     const history = useHistory();
+    
     const changeStateNow = (state:string) => {
         const userData  = db.collection("users").doc(state);
 
@@ -76,12 +77,13 @@ export const ContactListPage: React.VFC = () => {
             console.error("Error updating document: ", error);
         });
     };
-    const changeStateComplete = (state:string) => {
+
+    const changeStateInComplete = (state:string) => {
         const userData  = db.collection("users").doc(state);
 
         // Set the "capital" field of the city 'DC'
         return userData.update({
-            state: '対応済み'
+            state: '未対応'
         })
         .then(() => {
             console.log("Document successfully updated!");
@@ -99,7 +101,7 @@ export const ContactListPage: React.VFC = () => {
             const unSub = db
             .collection("users")
             .where("staff", "==", false)
-            .where("state", "==", "未対応")
+            .where("state", "==", '対応済み')
             .orderBy("timestamp", "asc")
             .onSnapshot((snapshot) =>
                 setContacts(
@@ -164,8 +166,8 @@ export const ContactListPage: React.VFC = () => {
                                     <Button variant="contained" color="primary" href="#contained-buttons">チャットページのリンクはこちら</Button>
                                     </Link>
                                 </Typography>
+                                <Typography><button onClick={() => changeStateInComplete(contact.gid)}>未対応</button></Typography>
                                 <Typography><button onClick={() => changeStateNow(contact.gid)}>対応中</button></Typography>
-                                <Typography><button onClick={() => changeStateComplete(contact.gid)}>対応済み</button></Typography>
                                 </Paper>
                             </TimelineContent>
                         </TimelineItem>
