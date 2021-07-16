@@ -5,14 +5,8 @@ import { useSelector } from "react-redux";
 import { selectUser } from "./../../features/userSlice";
 import { useHistory } from 'react-router';
 import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem from '@material-ui/lab/TimelineItem';
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
-import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineDot from '@material-ui/lab/TimelineDot';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
-import Typography from '@material-ui/core/Typography';
-import {Person} from '@material-ui/icons';
+
+import { TextItem } from '../atomos/TextItem';
 
 
 const useStyles = makeStyles({
@@ -103,62 +97,17 @@ export const TextItems:React.VFC = memo(() => {
         };
       }, [user.uid]);
 
+      const length = texts.length;
+
     return (
         <div className={classes.root}>
            {texts[0]?.who && (
                 <>
                   <Timeline align="left">
-                    {texts.map((text,index) => (
-                        text.who === 'お客様' ? 
-                          <TimelineItem key={index}>
-                            <TimelineSeparator>
-                              <Person style={{ color: '#32abdc'}}/>
-                              <TimelineConnector />
-                            </TimelineSeparator>
-                            <TimelineContent>
-                              <Typography>
-                                <div className={classes.flexWrap}>
-                                  <div className={classes.lineWrap}>
-                                    <div className={classes.line}></div>
-                                  </div>
-                                  <div className={classes.textWrap}>
-                                    <div className={classes.borderWrap}>
-                                      <div className={classes.rightName}>{text.who}</div>
-                                      <div className={classes.content}>{text.text}</div>
-                                    </div>
-                                    <div className={classes.timelineWrap}>{text.timestamp?.toDate().toLocaleString()}</div>
-                                  </div>
-                                </div>
-                                </Typography>
-                            </TimelineContent>
-                          </TimelineItem>
-                         : 
-                         <TimelineItem>
-                          <TimelineOppositeContent>
-                            <Typography>
-                                <div className={classes.flexWrapRight}>
-                                  <div className={classes.textWrap}>
-                                    <div className={classes.borderWrap}>
-                                      <div className={classes.leftName}>{text.who}</div>
-                                      <div className={classes.content}>{text.text}</div>
-                                    </div>
-                                    <div className={classes.timelineWrapLeft}>{text.timestamp?.toDate().toLocaleString()}</div>
-                                  </div>
-                                  <div className={classes.lineWrap}>
-                                    <div className={classes.line}></div>
-                                  </div>
-                                </div>
-                            </Typography>
-                            
-                          </TimelineOppositeContent>
-                          <TimelineSeparator>
-                            <Person style={{ color: '#00a968'}}/>
-                            <TimelineConnector />
-                          </TimelineSeparator>
-                          <TimelineContent>
-                          </TimelineContent>
-                        </TimelineItem>
-                    ))}
+                    {texts.map((text,index) => {
+                       const isLastItem = length === index + 1;
+                        return <TextItem key={index} text={text} isLastItem={isLastItem}/>
+                    })}
                   </Timeline>
                 </>
             )}

@@ -13,6 +13,7 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import Typography from '@material-ui/core/Typography';
 import {Person} from '@material-ui/icons';
+import { StaffTextItem } from '../atomos/StaffTextItem';
 
 const useStyles = makeStyles({
     root: {
@@ -106,62 +107,17 @@ export const StaffTextItems:React.VFC<PROPS> = memo(({id}) => {
         };
       }, [user.uid]);
 
+      const length = texts.length;
+
     return (
         <div className={classes.root}>
            {texts[0]?.who && (
                 <>
                   <Timeline align="left">
-                    {texts.map((text,index) => (
-                        text.who !== 'お客様' ? 
-                          <TimelineItem key={index}>
-                            <TimelineSeparator>
-                              <Person style={{ color: '#00a968'}}/>
-                              <TimelineConnector />
-                            </TimelineSeparator>
-                            <TimelineContent>
-                              <Typography>
-                                <div className={classes.flexWrap}>
-                                  <div className={classes.lineWrap}>
-                                    <div className={classes.line}></div>
-                                  </div>
-                                  <div className={classes.textWrap}>
-                                    <div className={classes.borderWrap}>
-                                      <div className={classes.rightName}>{text.who}</div>
-                                      <div className={classes.content}>{text.text}</div>
-                                    </div>
-                                    <div className={classes.timelineWrap}>{text.timestamp?.toDate().toLocaleString()}</div>
-                                  </div>
-                                </div>
-                                </Typography>
-                            </TimelineContent>
-                          </TimelineItem>
-                         :
-                         <TimelineItem>
-                          <TimelineOppositeContent>
-                            <Typography>
-                                <div className={classes.flexWrapRight}>
-                                  <div className={classes.textWrap}>
-                                    <div className={classes.borderWrap}>
-                                      <div className={classes.leftName}>{text.who}</div>
-                                      <div className={classes.content}>{text.text}</div>
-                                    </div>
-                                    <div className={classes.timelineWrapLeft}>{text.timestamp?.toDate().toLocaleString()}</div>
-                                  </div>
-                                  <div className={classes.lineWrap}>
-                                    <div className={classes.line}></div>
-                                  </div>
-                                </div>
-                            </Typography>
-                            
-                          </TimelineOppositeContent>
-                          <TimelineSeparator>
-                            <Person style={{ color: '#32abdc'}}/>
-                            <TimelineConnector />
-                          </TimelineSeparator>
-                          <TimelineContent>
-                          </TimelineContent>
-                        </TimelineItem>
-                    ))}
+                    {texts.map((text,index) => {
+                        const isLastItem = length === index + 1;
+                        return <StaffTextItem key={index} text={text} isLastItem={isLastItem}/>
+                    })}
                   </Timeline>
                 </>
             )}
