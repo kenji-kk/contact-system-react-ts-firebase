@@ -12,6 +12,8 @@ import { LoginGuestPage } from "./components/pages/LoginGuestPage";
 import { NewStaffPage } from "./components/pages/NewStaffPage";
 import { LoginStaffPage } from "./components/pages/LoginStaffPage";
 import { StaffChatPage } from "./components/pages/StaffChatPage";
+import { ContactListNowPage } from "./components/pages/ContactListNowPage";
+import { ContactListCompletePage } from "./components/pages/ContactListCompletePage";
 
 
 export const App: React.VFC = () => {
@@ -80,6 +82,12 @@ export const App: React.VFC = () => {
         </Route>
         <Route exact path={'/contactList'}>
           <ContactListPage />
+        </Route>
+        <Route exact path={'/contactListNow'}>
+          <ContactListNowPage />
+        </Route>
+        <Route exact path={'/contactListComplete'}>
+          <ContactListCompletePage />
         </Route>
         <Route exact path={'/staff'}>
           <NewStaffPage />
