@@ -61,9 +61,37 @@ export const ContactListPage: React.VFC = () => {
     const [contacts, setContacts] = useState<CONTACT[]>([
     ]);
     const history = useHistory();
-    if(user.staff){
-        
+    const changeStateNow = (state:string) => {
+        const userData  = db.collection("users").doc(state);
+
+        // Set the "capital" field of the city 'DC'
+        return userData.update({
+            state: user.uid
+        })
+        .then(() => {
+            console.log("Document successfully updated!");
+        })
+        .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+    };
+    const changeStateComplete = (state:string) => {
+        const userData  = db.collection("users").doc(state);
+
+        // Set the "capital" field of the city 'DC'
+        return userData.update({
+            state: '対応済み'
+        })
+        .then(() => {
+            console.log("Document successfully updated!");
+        })
+        .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
     }
+
     useEffect(() => {
         if(!user.staff){
             history.push('/staff');
@@ -71,6 +99,7 @@ export const ContactListPage: React.VFC = () => {
             const unSub = db
             .collection("users")
             .where("staff", "==", false)
+            .where("state", "==", "未対応")
             .orderBy("timestamp", "asc")
             .onSnapshot((snapshot) =>
                 setContacts(
@@ -132,6 +161,8 @@ export const ContactListPage: React.VFC = () => {
                                     <Button variant="contained" color="primary" href="#contained-buttons">チャットページのリンクはこちら</Button>
                                     </Link>
                                 </Typography>
+                                <Typography><button onClick={() => changeStateNow(contact.gid)}>aaaaaaaaaa</button></Typography>
+                                <Typography><button onClick={() => changeStateComplete(contact.gid)}>aaaaaaaaaa</button></Typography>
                                 </Paper>
                             </TimelineContent>
                         </TimelineItem>
