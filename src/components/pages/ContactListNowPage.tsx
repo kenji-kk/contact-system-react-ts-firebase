@@ -53,7 +53,10 @@ const useStyles = makeStyles((theme) => ({
     title:{
         fontSize:'2vw',
         fontWeight:'bold',
-    }
+    },
+    buttonWrap: {
+        textAlign: 'right',
+    },
   }));
 
 export const ContactListNowPage: React.VFC = () => {
@@ -130,8 +133,8 @@ export const ContactListNowPage: React.VFC = () => {
         <div>
             <div className={classes.headerWrap}>
                 <p className={classes.title}>お問い合わせ一覧ページです</p>
-                <SignoutButton />
                 <StateChangeBackBackButtons />
+                <div className={classes.buttonWrap}><SignoutButton /></div>
             </div>
             <hr/>
             <Timeline align="alternate">
