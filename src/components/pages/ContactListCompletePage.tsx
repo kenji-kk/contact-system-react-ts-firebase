@@ -18,6 +18,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { SignoutButton } from '../atomos/buttons/SignoutButton';
 import { StateChangeBackBackButtons } from '../atomos/buttons/StateChangeBackButtons';
+import { DoubleCompleteButtons } from '../atomos/buttons/DoubleCompleteButtons';
 
 
 
@@ -53,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
     title:{
         fontSize:'2vw',
         fontWeight:'bold',
+        backgroundColor: '#CD853F',
+        padding: '10px 0',
     },
     buttonWrap: {
         textAlign: 'right',
@@ -132,7 +135,7 @@ export const ContactListCompletePage: React.VFC = () => {
     return (
         <div>
             <div className={classes.headerWrap}>
-                <p className={classes.title}>お問い合わせ一覧ページです</p>
+                <p className={classes.title}>お問い合わせ一覧ページです(対応済み)</p>
                 <StateChangeBackBackButtons />
                 <div className={classes.buttonWrap}><SignoutButton /></div>
             </div>
@@ -163,13 +166,7 @@ export const ContactListCompletePage: React.VFC = () => {
                                 <Typography>製品種別: {contact.productType}</Typography>
                                 <Typography>問い合わせ内容: {contact.content}</Typography>
                                 <Typography>　</Typography>
-                                <Typography>
-                                    <Link className={classes.link} to={"/staffChat/" + contact.gid}>
-                                    <Button variant="contained" color="primary" href="#contained-buttons">チャットページのリンクはこちら</Button>
-                                    </Link>
-                                </Typography>
-                                <Typography><button onClick={() => changeStateInComplete(contact.gid)}>未対応</button></Typography>
-                                <Typography><button onClick={() => changeStateNow(contact.gid)}>対応中</button></Typography>
+                                <Typography><DoubleCompleteButtons gid={contact.gid}/></Typography>
                                 </Paper>
                             </TimelineContent>
                         </TimelineItem>
