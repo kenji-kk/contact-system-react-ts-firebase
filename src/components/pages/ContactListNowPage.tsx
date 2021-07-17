@@ -17,6 +17,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { SignoutButton } from '../atomos/buttons/SignoutButton';
+import { StateChangeBackBackButtons } from '../atomos/buttons/StateChangeBackButtons';
 
 
 
@@ -130,9 +131,7 @@ export const ContactListNowPage: React.VFC = () => {
             <div className={classes.headerWrap}>
                 <p className={classes.title}>お問い合わせ一覧ページです</p>
                 <SignoutButton />
-                <button onClick={() => {history.push('/contactList')}}>未対応</button>
-                <button onClick={() => {history.push('/contactListNow')}}>対応中</button>
-                <button onClick={() => {history.push('/contactListComplete')}}>対応済み</button>
+                <StateChangeBackBackButtons />
             </div>
             <hr/>
             <Timeline align="alternate">
