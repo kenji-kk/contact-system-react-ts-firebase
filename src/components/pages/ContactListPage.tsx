@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "./../../features/userSlice";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { ButtonGroup } from '@material-ui/core';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
@@ -17,6 +17,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { SignoutButton } from '../atomos/buttons/SignoutButton';
+import { StateChangeBackBackButtons } from '../atomos/buttons/StateChangeBackButtons';
+import { DoubleInCompleteButtons } from '../atomos/buttons/DoubleInCompleteButtons';
 
 
 
@@ -52,7 +54,12 @@ const useStyles = makeStyles((theme) => ({
     title:{
         fontSize:'2vw',
         fontWeight:'bold',
-    }
+        backgroundColor: '#FFD700',
+        padding: '10px 0',
+    },
+    buttonWrap: {
+        textAlign: 'right',
+    },
   }));
 
 export const ContactListPage: React.VFC = () => {
@@ -126,11 +133,9 @@ export const ContactListPage: React.VFC = () => {
     return (
         <div>
             <div className={classes.headerWrap}>
-                <p className={classes.title}>お問い合わせ一覧ページです</p>
-                <SignoutButton />
-                <button onClick={() => {history.push('/contactList')}}>未対応</button>
-                <button onClick={() => {history.push('/contactListNow')}}>対応中</button>
-                <button onClick={() => {history.push('/contactListComplete')}}>対応済み</button>
+                <p className={classes.title}>お問い合わせ一覧ページです(未対応)</p>
+                <StateChangeBackBackButtons />
+                <div className={classes.buttonWrap}><SignoutButton /></div>
             </div>
             <hr/>
             <Timeline align="alternate">
@@ -159,13 +164,7 @@ export const ContactListPage: React.VFC = () => {
                                 <Typography>製品種別: {contact.productType}</Typography>
                                 <Typography>問い合わせ内容: {contact.content}</Typography>
                                 <Typography>　</Typography>
-                                <Typography>
-                                    <Link className={classes.link} to={"/staffChat/" + contact.gid}>
-                                    <Button variant="contained" color="primary" href="#contained-buttons">チャットページのリンクはこちら</Button>
-                                    </Link>
-                                </Typography>
-                                <Typography><button onClick={() => changeStateNow(contact.gid)}>対応中</button></Typography>
-                                <Typography><button onClick={() => changeStateComplete(contact.gid)}>対応済み</button></Typography>
+                                <Typography><DoubleInCompleteButtons gid={contact.gid}/></Typography>
                                 </Paper>
                             </TimelineContent>
                         </TimelineItem>
