@@ -16,23 +16,16 @@ import { ContactListNowPage } from "./components/pages/ContactListNowPage";
 import { ContactListCompletePage } from "./components/pages/ContactListCompletePage";
 import { Loading } from "./components/pages/Loading";
 
-export const App: React.VFC = () => {
+export const App: React.FC = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const history = useHistory();
   const [flagId, setFlagId] = useState("");
-  const historyContact = () => {
-    history.push("/contactList");
-  };
-  const historyChat = () => {
-    history.push("/chat");
-  };
 
   useEffect(() => {
     const unSub = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         const docRef = db.collection("users").doc(authUser?.uid);
-
         docRef
           .get()
           .then(function (doc) {
@@ -50,12 +43,7 @@ export const App: React.VFC = () => {
                   content: doc.data()?.content,
                 })
               );
-              setFlagId(doc.data()?.uid);
-              if (doc.data()?.staff) {
-                historyContact();
-              } else if (!doc.data()?.staff) {
-                historyChat();
-              }
+              history.push("/loading");
             } else {
               console.log("No such document!");
             }
@@ -82,27 +70,27 @@ export const App: React.VFC = () => {
         <NewStaffPage />
         <LoginStaffPage />
       </Route>
-      {flagId ? (
-        <>
-          <Route exact path={"/chat"}>
-            <ChatPage />
-          </Route>
-          <Route exact path={"/staffChat/:id"}>
-            <StaffChatPage />
-          </Route>
-          <Route exact path={"/contactList"}>
-            <ContactListPage />
-          </Route>
-          <Route exact path={"/contactListNow"}>
-            <ContactListNowPage />
-          </Route>
-          <Route exact path={"/contactListComplete"}>
-            <ContactListCompletePage />
-          </Route>
-        </>
-      ) : (
+      <Route exact path={"/chat"}>
+        <ChatPage />
+      </Route>
+      <Route exact path={"/staffChat/:id"}>
+        <StaffChatPage />
+      </Route>
+      <Route exact path={"/contactList"}>
+        <ContactListPage />
+      </Route>
+      <Route exact path={"/contactListNow"}>
+        <ContactListNowPage />
+      </Route>
+      <Route exact path={"/contactListComplete"}>
+        <ContactListCompletePage />
+      </Route>
+      <Route exact path={"/loading"}>
         <Loading />
-      )}
+      </Route>
+      <Route exact path={"/loading"}>
+        <Loading />
+      </Route>
     </>
   );
 };
