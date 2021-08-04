@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser, login, logout } from "./features/userSlice";
 import { auth } from "./firebase";
@@ -14,11 +14,13 @@ import { LoginStaffPage } from "./components/pages/LoginStaffPage";
 import { StaffChatPage } from "./components/pages/StaffChatPage";
 import { ContactListNowPage } from "./components/pages/ContactListNowPage";
 import { ContactListCompletePage } from "./components/pages/ContactListCompletePage";
+import { Loading } from "./components/pages/Loading";
 
 export const App: React.VFC = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [flagId, setFlagId] = useState("");
   const historyContact = () => {
     history.push("/contactList");
   };
@@ -48,6 +50,7 @@ export const App: React.VFC = () => {
                   content: doc.data()?.content,
                 })
               );
+              setFlagId(doc.data()?.uid);
               if (doc.data()?.staff) {
                 historyContact();
               } else if (!doc.data()?.staff) {
@@ -79,21 +82,27 @@ export const App: React.VFC = () => {
         <NewStaffPage />
         <LoginStaffPage />
       </Route>
-      <Route exact path={"/chat"}>
-        <ChatPage />
-      </Route>
-      <Route exact path={"/staffChat/:id"}>
-        <StaffChatPage />
-      </Route>
-      <Route exact path={"/contactList"}>
-        <ContactListPage />
-      </Route>
-      <Route exact path={"/contactListNow"}>
-        <ContactListNowPage />
-      </Route>
-      <Route exact path={"/contactListComplete"}>
-        <ContactListCompletePage />
-      </Route>
+      {flagId ? (
+        <>
+          <Route exact path={"/chat"}>
+            <ChatPage />
+          </Route>
+          <Route exact path={"/staffChat/:id"}>
+            <StaffChatPage />
+          </Route>
+          <Route exact path={"/contactList"}>
+            <ContactListPage />
+          </Route>
+          <Route exact path={"/contactListNow"}>
+            <ContactListNowPage />
+          </Route>
+          <Route exact path={"/contactListComplete"}>
+            <ContactListCompletePage />
+          </Route>
+        </>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 };
