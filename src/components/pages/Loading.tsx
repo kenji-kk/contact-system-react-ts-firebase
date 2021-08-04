@@ -4,6 +4,7 @@ import { auth } from "./../../firebase";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { selectUser } from "./../../features/userSlice";
+import { Circular } from "../atomos/Circular";
 
 const useStyles = makeStyles({
   text: {
@@ -28,5 +29,12 @@ export const Loading: React.FC = memo(() => {
     }
   }, []);
 
-  return <div className={classes.text}>Loading...</div>;
+  return (
+    <div className={classes.text}>
+      <p>Loading...</p>
+      <div>
+        <Circular />
+      </div>
+    </div>
+  );
 });
