@@ -19,6 +19,8 @@ import Typography from "@material-ui/core/Typography";
 import { SignoutButton } from "../atomos/buttons/SignoutButton";
 import { StateChangeBackBackButtons } from "../atomos/buttons/StateChangeBackButtons";
 import { DoubleInCompleteButtons } from "../atomos/buttons/DoubleInCompleteButtons";
+import { Loading } from "./Loading";
+import { NoEffectLoadingPage } from "./NoEffectLoadingPage";
 
 interface CONTACT {
   gid: string;
@@ -65,42 +67,10 @@ export const ContactListPage: React.VFC = () => {
   const classes = useStyles();
   const [contacts, setContacts] = useState<CONTACT[]>([]);
   const history = useHistory();
-  const changeStateNow = (state: string) => {
-    const userData = db.collection("users").doc(state);
-
-    // Set the "capital" field of the city 'DC'
-    return userData
-      .update({
-        state: user.uid,
-      })
-      .then(() => {
-        console.log("Document successfully updated!");
-      })
-      .catch((error) => {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-      });
-  };
-  const changeStateComplete = (state: string) => {
-    const userData = db.collection("users").doc(state);
-
-    // Set the "capital" field of the city 'DC'
-    return userData
-      .update({
-        state: "対応済み",
-      })
-      .then(() => {
-        console.log("Document successfully updated!");
-      })
-      .catch((error) => {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-      });
-  };
 
   useEffect(() => {
     if (!user.staff) {
-      history.push("/staff");
+      history.goBack();
     } else {
       const unSub = db
         .collection("users")
@@ -128,7 +98,7 @@ export const ContactListPage: React.VFC = () => {
     }
   }, []);
   if (!user.staff) {
-    return null;
+    return <NoEffectLoadingPage />;
   }
 
   return (

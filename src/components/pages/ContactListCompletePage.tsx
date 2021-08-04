@@ -19,6 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import { SignoutButton } from "../atomos/buttons/SignoutButton";
 import { StateChangeBackBackButtons } from "../atomos/buttons/StateChangeBackButtons";
 import { DoubleCompleteButtons } from "../atomos/buttons/DoubleCompleteButtons";
+import { NoEffectLoadingPage } from "./NoEffectLoadingPage";
 
 interface CONTACT {
   gid: string;
@@ -102,7 +103,7 @@ export const ContactListCompletePage: React.VFC = () => {
 
   useEffect(() => {
     if (!user.staff) {
-      history.push("/staff");
+      history.goBack();
     } else {
       const unSub = db
         .collection("users")
@@ -130,7 +131,7 @@ export const ContactListCompletePage: React.VFC = () => {
     }
   }, []);
   if (!user.staff) {
-    return null;
+    return <NoEffectLoadingPage />;
   }
 
   return (
